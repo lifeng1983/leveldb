@@ -9,6 +9,10 @@ namespace leveldb {
 Env::~Env() {
 }
 
+Status Env::NewAppendableFile(const std::string& fname, WritableFile** result) {
+  return Status::NotSupported("NewAppendableFile", fname);
+}
+
 SequentialFile::~SequentialFile() {
 }
 
@@ -25,7 +29,7 @@ FileLock::~FileLock() {
 }
 
 void Log(Logger* info_log, const char* format, ...) {
-  if (info_log != NULL) {
+  if (info_log != nullptr) {
     va_list ap;
     va_start(ap, format);
     info_log->Logv(format, ap);
